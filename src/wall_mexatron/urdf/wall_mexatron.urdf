@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="wall_mexatron">
+<link name="base_link">
+  <inertial>
+    <mass value="1.0"/>
+    <inertia ixx="0.015" iyy="0.0375" izz="0.0375"
+    ixy="0" ixz="0" iyz="0"/>
+  </inertial>
+  <visual>
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 1.5708" />
+    <geometry>
+      <mesh
+        filename="package://wall_mexatron/meshes/chassis_rsz.stl"/>
+    </geometry>
+    <material
+      name="">
+      <color
+        rgba="1 1 1 1" />
+    </material>
+  </visual>
+  <collision>
+    <origin
+      xyz="0 0 0"
+      rpy="0 3 0" />
+    <geometry>
+      <box size='0.15 0.15 0.02'/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- BreadBoard -->
+<link name="breadboard">
+  <inertial>
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <mass
+      value="0.001" />
+    <inertia
+      ixx="0.01"
+      ixy="0.01"
+      ixz="0.01"
+      iyy="0.01"
+      iyz="0.01"
+      izz="0.01" />
+  </inertial>
+  <visual>
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <geometry>
+      <mesh
+        filename="package://wall_mexatron/meshes/breadboard_rsz.stl"/>
+    </geometry>
+    <material
+      name="">
+      <color
+        rgba="236 236 236 1" />
+    </material>
+  </visual>
+  <collision>
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <geometry>
+      <mesh
+        filename="package://wall_mexatron/meshes/breadboard_rsz.stl"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="breadboard_to_base" type="fixed">
+  <parent link="base_link"/>
+  <child link="breadboard"/>
+  <origin xyz="0.034 0 0.015" rpy="0 0 1.5708"/>
+</joint>
+
+<!-- PCB-->
+<link name="pcb_link">
+  <inertial>
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <mass
+      value="0.001" />
+    <inertia
+      ixx="0.01"
+      ixy="0.01"
+      ixz="0.01"
+      iyy="0.01"
+      iyz="0.01"
+      izz="0.01" />
+  </inertial>
+  <visual>
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <geometry>
+      <mesh
+        filename="package://wall_mexatron/meshes/pcb_rsz.stl" />
+    </geometry>
+    <material
+      name="">
+      <color
+        rgba="255 215 0 1" />
+    </material>
+  </visual>
+  <collision>
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <geometry>
+      <box size='0.06 0.09 0.01'/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="pcb_to_base" type="fixed">
+  <origin xyz="-0.018 0 0.026" rpy="0 0 1.5708"/>
+  <parent link="base_link"/>
+  <child link="pcb_link"/>
+  <axis xyz="0 0 0"/>
+</joint>
+
+<!--Left Wheel-->
+  <link
+    name="wheellft">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="5.1458e-5" iyy="5.1458e-5" izz="6.125e-5"
+    ixy="0" ixz="0" iyz="0"/>
+  </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 1.5708 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_mexatron/meshes/wheel_rsz.stl"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.01" radius="0.0385"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="wheelleft"
+    type="continuous">
+    <parent link="base_link" />
+    <child link="wheellft" />
+    <origin xyz="-0.0345 0.075 -0.012" rpy="-1.57 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+<!--Rigth Wheel-->
+  <link
+    name="wheelrgt">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="5.1458e-5" iyy="5.1458e-5" izz="6.125e-5"
+    ixy="0" ixz="0" iyz="0"/>
+  </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 1.5708 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_mexatron/meshes/wheel_rsz.stl"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.01" radius="0.0385"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint
+    name="wheelright"
+    type="continuous">
+    <parent link="base_link" />
+    <child link="wheelrgt" />
+    <origin xyz="-0.0345 -0.075 -0.012" rpy="-1.57 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+
+<!-- Ball Caster--> 
+  <link
+    name="caster_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="5.1458e-5" iyy="5.1458e-5" izz="6.125e-5"
+    ixy="0" ixz="0" iyz="0"/>
+  </inertial>
+  
+    <ode>
+      <mu>0</mu>
+      <mu2>0</mu2>
+      <fdir1> 0 0 0</fdir1>
+      <slip1>0</slip1>
+      <slip2>0</slip2>
+    </ode>
+  
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_mexatron/meshes/ballcaster_rsz.stl"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.0125"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="caster_joint"
+    type="continuous">
+    <origin
+        xyz="0.052 0 -0.034"
+        rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="caster_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.07 0 0.02" rpy="0 -0.05 0"/>
+    <parent link="base_link"/>
+    <child link="hokuyo_link"/>
+  </joint>
+
+  <!-- Hokuyo Laser -->
+  <link name="hokuyo_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://wall_mexatron/meshes/hokuyo.dae" scale="0.2 0.2 0.2"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <!-- hokuyo -->
+  <gazebo reference="hokuyo_link">
+    <sensor type="ray" name="head_hokuyo_sensor">  
+      <visualize>true</visualize>
+      <update_rate>30</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>180</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.4</min> <!-- initial value min0.15 kai max15.0 -->
+          <max>4.0</max> 
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/scan</topicName>
+        <frameName>hokuyo_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+  
+
+<gazebo>
+  <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+    <commandTopic>cmd_vel</commandTopic>
+    <odometryTopic>odom</odometryTopic>
+    <odometryFrame>odom</odometryFrame>
+    <odometrySource>world</odometrySource>
+    <publishOdomTF>true</publishOdomTF>
+    <robotBaseFrame>base_link</robotBaseFrame>
+    <publishWheelTF>false</publishWheelTF>
+    <publishTf>true</publishTf>
+    <publishWheelJointState>true</publishWheelJointState>
+    <legacyMode>false</legacyMode>
+    <updateRate>30</updateRate>
+    <leftJoint>wheelleft</leftJoint>
+    <rightJoint>wheelright</rightJoint>
+    <wheelSeparation>0.72</wheelSeparation>
+    <wheelDiameter>0.1</wheelDiameter>
+    <wheelAcceleration>1</wheelAcceleration>
+    <wheelTorque>100</wheelTorque>
+    <rosDebugLevel>na</rosDebugLevel>
+  </plugin>
+</gazebo>
+
+<gazebo reference="base_link">
+  <material>Gazebo/Grey</material>
+</gazebo>
+<gazebo reference="breadboard">
+  <material>Gazebo/White</material>
+</gazebo>
+<gazebo reference="pcb_link">
+  <material>Gazebo/Gold</material>
+</gazebo>
+<gazebo reference="caster_link">
+  <material>Gazebo/Black</material>
+  <mu1>0</mu1>
+  <mu2>0</mu2>
+<minDepth>0.001</minDepth>
+  <kp>100000000</kp>
+  <kd>1</kd>
+</gazebo>
+<gazebo reference="wheelrgt">
+  <material>Gazebo/Black</material>
+  <minDepth>0.001</minDepth>
+  <kp>100000000</kp>
+  <kd>1</kd>
+</gazebo>
+<gazebo reference="wheellft">
+  <material>Gazebo/Black</material>
+  <minDepth>0.001</minDepth>
+  <kp>100000000</kp>
+  <kd>1</kd>
+</gazebo>
+
+
+</robot>

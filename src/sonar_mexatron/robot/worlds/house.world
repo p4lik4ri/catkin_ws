@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+
+<sdf version="1.4">
+
+  <world name="default">
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+  <scene>
+    <ambient>0.0 0.0 0.0 1.0</ambient>
+    <shadows>0</shadows>
+  </scene>
+
+
+<light type="point_light" name="light1">
+    <pose> -4 -3.5 1.5 0 0 0 </pose>
+</light>
+
+<light type="point_light" name="light2">
+    <pose> -4 -4 1.5 0 0 0 </pose>
+</light>
+
+    <!-- World camera -->
+    <gui fullscreen='0'>
+      <camera name='world_camera'>
+        <pose>4.927360 -4.376610 3.740080 0.000000 0.275643 2.356190</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+
+
+
+
+    <include>
+      <name>house</name>
+        <uri>model://house</uri>
+       <pose>3 3 0 0 0 0</pose>
+    </include> 
+
+
+  </world>
+</sdf>

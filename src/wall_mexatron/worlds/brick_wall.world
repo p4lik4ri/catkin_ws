@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <world name='brick_wall'>
+    <include>
+      <uri>model://brick_wall</uri>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+  </world>
+</sdf>

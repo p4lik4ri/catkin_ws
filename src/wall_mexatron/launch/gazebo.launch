@@ -1,0 +1,36 @@
+<launch>
+
+  <arg name="x" default="-3.895111"/>
+  <arg name="y" default="-1.895793"/>
+  <arg name="z" default="0.04"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="0.7"/>
+  <!-- Load the CougarBot URDF model into the parameter server -->
+  <param name="robot_description" textfile="$(find wall_mexatron)/urdf/wall_mexatron.urdf" />
+  <!-- Start Gazebo with an empty world -->
+  <arg name="world_name" default="empty"/> 
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <param name="use_sim_time" value="true"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find wall_mexatron)/worlds/brick_wall.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="debug" value="$(arg debug)"/>
+    
+  </include>  
+  <!-- Spawn a CougarBot in Gazebo, taking the description from the parameter server -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model robot
+  -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)" />
+
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+</launch>

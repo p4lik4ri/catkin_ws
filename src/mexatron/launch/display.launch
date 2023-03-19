@@ -1,0 +1,10 @@
+<launch>
+  <arg name="model" />
+  <arg name="gui" default="TRUE" />
+  <param name="robot_description" textfile="$(find mexatron)/urdf/mexatron.urdf" />
+  <param name="use_gui" value="$(arg gui)" />
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/>
+  <node name="rviz" pkg="rviz" type="rviz"
+    args="-d $(find mexatron)/rviz/rviz.rviz" />
+</launch>
